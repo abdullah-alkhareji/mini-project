@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams, Navigate } from "react-router-dom";
 import books from "../data/books";
-import members from "../data/members";
+import memberStore from "../stores/memberStore";
 
 const MemberProfile = () => {
 	const { slug } = useParams();
-	const member = members.find(member => member.slug === slug);
+	const member = memberStore.members.find(member => member.slug === slug);
 	if (!member) return <Navigate to='/' />;
 
 	return (

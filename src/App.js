@@ -11,13 +11,15 @@ function App() {
 	return (
 		<div className='container-fluid p-0'>
 			<NavBar />
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/members' element={<MembersList />} />
-				<Route path='/members/:slug' element={<MemberProfile />} />
-				<Route path='/books' element={<BooksList />} />
-				<Route path='/books/:slug' element={<BookDetails />} />
-			</Routes>
+			<div className='container bg-light'>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/members' element={<MembersList />} />
+					<Route path='/members/:slug' element={<MemberProfile />} />
+					<Route path='/books' element={<BooksList />} />
+					<Route path='/books/:slug' element={<BookDetails />} />
+				</Routes>
+			</div>
 		</div>
 	);
 }

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bookStore from "../stores/bookStore";
 import { observer } from "mobx-react";
+import { Button } from "react-bootstrap";
+import AddBookModal from "./AddBookModal";
 
 const BooksList = () => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleClose = () => setIsOpen(false);
+	const handleOpen = () => setIsOpen(true);
+
 	const search = e => bookStore.setQuery(e.target.value);
 
 	const booksList = bookStore.books
@@ -24,7 +31,12 @@ const BooksList = () => {
 		));
 	return (
 		<div className='list'>
-			<h1 className='page-title'>Books</h1>
+			<div className='page-title w-100 d-flex justify-content-between align-items-center mb-3'>
+				<h1>Books</h1>
+				<Button variant='outline-dark' onClick={handleOpen}>
+					Add New Book
+				</Button>
+			</div>
 			<hr />
 			<div className='d-flex gap-3'>
 				<input
@@ -37,6 +49,7 @@ const BooksList = () => {
 				/>
 			</div>
 			<ul>{booksList}</ul>
+			<AddBookModal isOpen={isOpen} handleClose={handleClose} />
 		</div>
 	);
 };
