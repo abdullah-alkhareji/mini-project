@@ -4,36 +4,26 @@ import bookStore from "../stores/bookStore";
 import memberStore from "../stores/memberStore";
 
 const AddBookModal = ({ isOpen, handleClose }) => {
+	
 	const [newBook, setNewBook] = useState({
 		author: "",
 		title: "",
-		genre: [],
+		genre: "",
 	});
 
-	// const [check, setCheck] = useState([]);
-	// const handleCheck = ev => setCheck([...check, ev.target.value]);
-	// console.log(check);
-
-	let gen = [];
-	const handleCheck = ev => {
-		if (gen.includes(ev.target.value)) {
-			console.log(gen);
-			return gen;
-		} else {
-			console.log(gen);
-			return gen.push(ev.target.value);
-		}
-	};
 	const handleChange = e =>
-		setNewBook({ ...newBook, [e.target.name]: e.target.value });
+		setNewBook({
+			...newBook,
+			[e.target.name]: e.target.value,
+		});
+
+	console.log(newBook);
 
 	const handleSubmit = e => {
 		e.preventDefault();
 		bookStore.addBook(newBook);
 		handleClose();
 	};
-
-	// console.log(newBook);
 
 	return (
 		<Modal show={isOpen} onHide={handleClose}>
@@ -65,20 +55,11 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 					<Form.Group className='mt-2'>
 						<Form.Label>Genre: </Form.Label>
 
-						<Form.Check
-							label='1'
+						<Form.Control
+							type='text'
+							placeholder='use (,) for multiple genres (example: Crime, Mystery)'
 							name='genre'
-							type='checkbox'
-							value='two'
-							onChange={handleCheck}
-						/>
-
-						<Form.Check
-							label='2'
-							name='genre'
-							type='checkbox'
-							value='one'
-							onChange={handleCheck}
+							onChange={handleChange}
 						/>
 					</Form.Group>
 				</Modal.Body>
@@ -86,7 +67,11 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 					<Button variant='secondary' onClick={handleClose}>
 						Close
 					</Button>
-					<Button type='submit' variant='primary' onClick={handleClose}>
+					<Button
+						type='submit'
+						name='genre'
+						variant='primary'
+						onClick={handleClose}>
 						Save Changes
 					</Button>
 				</Modal.Footer>

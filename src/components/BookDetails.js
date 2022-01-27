@@ -2,10 +2,11 @@ import React from "react";
 import books from "../data/books";
 import { useParams, Navigate } from "react-router-dom";
 import members from "../data/members";
+import bookStore from "../stores/bookStore";
 
 const BookDetails = () => {
 	const { slug } = useParams();
-	const book = books.find(book => book.slug === slug);
+	const book = bookStore.books.find(book => book.slug === slug);
 	if (!book) return <Navigate to='/' />;
 
 	return (
@@ -16,7 +17,7 @@ const BookDetails = () => {
 				By: <span className='fw-lighter'>{book.author}</span>
 			</h3>
 			<h3 className='fw-light'>
-				Genre: <span className='fw-lighter'>{book.genre.join(" and ")}</span>
+				Genre: <span className='fw-lighter'>{book.genre.join(", ")}</span>
 			</h3>
 			<div className='details-borrowedBy'>
 				<h3 className='fw-light'>Borrowed By:</h3>
