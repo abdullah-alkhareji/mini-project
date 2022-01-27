@@ -1,38 +1,37 @@
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 
 const NavBar = () => {
 	return (
-		<nav class='navbar navbar-expand-lg navbar-light bg-light'>
-			<div class='container-fluid'>
-				<Link to='/' class='navbar-brand'>
+		<nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+			<div className='container-fluid'>
+				<Link to='/' className='navbar-brand'>
 					Library
 				</Link>
 				<button
-					class='navbar-toggler'
+					className='navbar-toggler'
 					type='button'
 					data-bs-toggle='collapse'
 					data-bs-target='#navbarNav'
 					aria-controls='navbarNav'
 					aria-expanded='false'
 					aria-label='Toggle navigation'>
-					<span class='navbar-toggler-icon'></span>
+					<span className='navbar-toggler-icon'></span>
 				</button>
-				<div class='collapse navbar-collapse' id='navbarNav'>
-					<ul class='navbar-nav'>
-						<li class='nav-item'>
-							<NavLink to='/' class='nav-link' aria-current='page'>
+				<div className='collapse navbar-collapse' id='navbarNav'>
+					<ul className='navbar-nav'>
+						<li className='nav-item'>
+							<NavLink to='/' className='nav-link' aria-current='page'>
 								Home
 							</NavLink>
 						</li>
-						<li class='nav-item'>
-							<NavLink to='/members' class='nav-link'>
+						<li className='nav-item'>
+							<NavLink to='/members' className='nav-link'>
 								Members
 							</NavLink>
 						</li>
-						<li class='nav-item'>
-							<NavLink to='/books' class='nav-link'>
+						<li className='nav-item'>
+							<NavLink to='/books' className='nav-link'>
 								Books
 							</NavLink>
 						</li>

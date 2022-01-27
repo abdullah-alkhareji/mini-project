@@ -9,17 +9,24 @@ const MemberProfile = () => {
 	if (!member) return <Navigate to='/' />;
 
 	return (
-		<div>
+		<div className='details'>
 			<h1 className='page-title'>
 				{member.firstName} {member.lastName}
 			</h1>
-			<h5 className='text-primary'>{member.membership}</h5>
-
-			<div>
-				<h3>Current Borrowed Books:</h3>
+			<hr />
+			<h3 className='fw-light'>
+				Membership: <span className='fw-lighter'>{member.membership}</span>
+			</h3>
+			<div className='details-borrowedBy'>
+				<h3 className='fw-light'>Current Borrowed Books:</h3>
 				<ul>
 					{member.currentlyBorrowedBooks.map(currBook =>
-						books.map(book => book.id === currBook && <li>{book.title}</li>)
+						books.map(
+							book =>
+								book.id === currBook && (
+									<li className='fw-light'>{book.title}</li>
+								)
+						)
 					)}
 				</ul>
 			</div>

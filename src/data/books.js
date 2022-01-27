@@ -24,7 +24,7 @@ const books = [
     slug: "mr.-penumbra's-24-hour-bookstore",
     genre: ["Suspense", "Fantasy"],
     available: false,
-    borrowedBy: [1, 3, 5, 1],
+    borrowedBy: [1, 3, 5],
   },
   {
     id: 4,

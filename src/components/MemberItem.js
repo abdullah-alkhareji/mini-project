@@ -1,5 +1,4 @@
 import React from "react";
-import books from "../data/books";
 
 const MemberItem = ({ member }) => {
 	return (
