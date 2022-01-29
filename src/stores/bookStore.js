@@ -26,7 +26,8 @@ class BookStore {
     this.books.filter(
       (book) =>
         book.id === +bookId &&
-        (book.borrowedBy = [...book.borrowedBy, +memberId])
+        ((book.borrowedBy = [...book.borrowedBy, +memberId]),
+        (book.available = false))
     );
   };
 }

@@ -39,10 +39,21 @@ const BookDetails = () => {
             )
           )}
         </ul>
-        {book.available && (
+        {book.available ? (
           <>
             <Button variant="outline-dark" onClick={setIsOpen}>
               Add New Book
+            </Button>
+            <AddBorrowerModal
+              isOpen={isOpen}
+              handleClose={handleClose}
+              book={book}
+            />
+          </>
+        ) : (
+          <>
+            <Button variant="outline-dark" onClick={setIsOpen}>
+              Return
             </Button>
             <AddBorrowerModal
               isOpen={isOpen}

@@ -60,11 +60,15 @@ const AddBorrowerModal = ({ isOpen, handleClose, book }) => {
               <option selected disabled>
                 Choose a member
               </option>
-              {memberStore.members.map((member) => (
-                <option key={member.id} value={member.id}>
-                  {member.firstName} {member.lastName}
-                </option>
-              ))}
+              {memberStore.members
+                .filter(
+                  (member) => !member.currentlyBorrowedBooks.includes(book.id)
+                )
+                .map((member) => (
+                  <option key={member.id} value={member.id}>
+                    {member.firstName} {member.lastName}
+                  </option>
+                ))}
             </Form.Select>
           </Form.Group>
         </Modal.Body>
