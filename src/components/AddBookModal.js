@@ -4,7 +4,6 @@ import bookStore from "../stores/bookStore";
 import memberStore from "../stores/memberStore";
 
 const AddBookModal = ({ isOpen, handleClose }) => {
-	
 	const [newBook, setNewBook] = useState({
 		author: "",
 		title: "",
@@ -16,7 +15,6 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 			...newBook,
 			[e.target.name]: e.target.value,
 		});
-
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -38,6 +36,7 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 							placeholder='Enter author name'
 							name='author'
 							onChange={handleChange}
+							required
 						/>
 					</Form.Group>
 
@@ -48,6 +47,7 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 							placeholder='Enter book title'
 							name='title'
 							onChange={handleChange}
+							required
 						/>
 					</Form.Group>
 
@@ -59,6 +59,7 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 							placeholder='use (,) for multiple genres (example: Crime, Mystery)'
 							name='genre'
 							onChange={handleChange}
+							required
 						/>
 					</Form.Group>
 				</Modal.Body>
@@ -69,9 +70,9 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 					<Button
 						type='submit'
 						name='genre'
-						variant='primary'
+						variant='warning'
 						onClick={handleClose}>
-						Save Changes
+						Add Book
 					</Button>
 				</Modal.Footer>
 			</Form>
