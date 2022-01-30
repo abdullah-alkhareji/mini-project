@@ -25,6 +25,16 @@ class MemberStore {
         ])
     );
   };
+
+  setReturn = (bookId) => {
+    this.members.find((member) =>
+      member.currentlyBorrowedBooks.includes(bookId)
+    ).currentlyBorrowedBooks = this.members
+      .find((member) => member.currentlyBorrowedBooks.includes(bookId))
+      .currentlyBorrowedBooks.splice(
+        // currentlyBorrowedBooks.indexOf(bookId, 1)
+      );
+  };
 }
 
 const memberStore = new MemberStore();

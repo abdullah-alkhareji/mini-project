@@ -4,34 +4,46 @@ import books from "../data/books";
 import memberStore from "../stores/memberStore";
 
 const MemberProfile = () => {
-	const { slug } = useParams();
-	const member = memberStore.members.find(member => member.slug === slug);
-	if (!member) return <Navigate to='/' />;
+  const { slug } = useParams();
+  const member = memberStore.members.find((member) => member.slug === slug);
+  if (!member) return <Navigate to="/" />;
 
-	return (
-		<div className='details'>
-			<h1 className='page-title'>
-				{member.firstName} {member.lastName}
-			</h1>
-			<hr />
-			<h3 className='fw-light'>
-				Membership: <span className='fw-lighter'>{member.membership}</span>
-			</h3>
-			<div className='details-borrowedBy'>
-				<h3 className='fw-light'>Current Borrowed Books:</h3>
-				<ul>
-					{member.currentlyBorrowedBooks.map(currBook =>
-						books.map(
-							book =>
-								book.id === currBook && (
-									<li className='fw-light'>{book.title}</li>
-								)
-						)
-					)}
-				</ul>
-			</div>
-		</div>
-	);
+  return (
+    <div className="details">
+      <h1 className="page-title">
+        {member.firstName} {member.lastName}
+      </h1>
+      <hr />
+      <div className="d-flex align-items-start gap-3">
+        <div className="card py-2 px-3 w-25">
+          <h3 className="fw-normal fs-3">
+            Membership: <br />{" "}
+            <span className="fw-lighter fs-5 text-capitalize">
+              {member.membership}
+            </span>
+          </h3>
+        </div>
+        <div className="details-borrowedBy w-75 card py-2 px-3 m-0">
+          <h3 className="fw-normal fs-3">Current Borrowed Books:</h3>
+          <ul>
+            {member.currentlyBorrowedBooks.map((currBook) =>
+              books.map(
+                (book) =>
+                  book.id === currBook && (
+                    <li
+                      key={member.id}
+                      className="fw-normal fs-5 py-1 px-2 bg-light mt-1 border rounded"
+                    >
+                      {book.title}
+                    </li>
+                  )
+              )
+            )}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MemberProfile;

@@ -30,6 +30,10 @@ class BookStore {
         (book.available = false))
     );
   };
+
+  setReturn = (bookId) => {
+    this.books.filter((book) => book.id === bookId && (book.available = true));
+  };
 }
 
 const bookStore = new BookStore();

@@ -51,11 +51,11 @@ const AddBorrowerModal = ({ isOpen, handleClose, book }) => {
     <Modal show={isOpen} onHide={handleClose}>
       <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Borrower</Modal.Title>
+          <Modal.Title>Borrow</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
-            <Form.Label>First Name</Form.Label>
+            <Form.Label>Borrower Name</Form.Label>
             <Form.Select onChange={handleChange}>
               <option selected disabled>
                 Choose a member
@@ -76,8 +76,8 @@ const AddBorrowerModal = ({ isOpen, handleClose, book }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button type="submit" variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button type="submit" variant="warning" onClick={handleClose}>
+            Borrow
           </Button>
         </Modal.Footer>
       </Form>

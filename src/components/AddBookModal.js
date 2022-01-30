@@ -17,7 +17,6 @@ const AddBookModal = ({ isOpen, handleClose }) => {
 			[e.target.name]: e.target.value,
 		});
 
-	console.log(newBook);
 
 	const handleSubmit = e => {
 		e.preventDefault();

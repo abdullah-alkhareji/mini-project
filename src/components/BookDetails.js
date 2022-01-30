@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import books from "../data/books";
 import { useParams, Navigate } from "react-router-dom";
 import members from "../data/members";
 import bookStore from "../stores/bookStore";
 import { Button } from "react-bootstrap";
 import AddBorrowerModal from "./AddBorrowerModal";
 import { observer } from "mobx-react";
+import memberStore from "../stores/memberStore";
 
 const BookDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,34 +15,25 @@ const BookDetails = () => {
   const book = bookStore.books.find((book) => book.slug === slug);
   if (!book) return <Navigate to="/" />;
 
+  const bookId = book.id;
+  // console.log(
+  //   memberStore.members
+  //     .find((member) => member.currentlyBorrowedBooks.includes(bookId))
+  //     .currentlyBorrowedBooks.indexOf(bookId)
+  // );
+  const handleReturn = () => {
+    memberStore.setReturn(bookId);
+    bookStore.setReturn(bookId);
+  };
+
   return (
     <div className="details">
-      <h1 className="page-title">{book.title}</h1>
-      <hr />
-      <h3 className="fw-light">
-        By: <span className="fw-lighter">{book.author}</span>
-      </h3>
-      <h3 className="fw-light">
-        Genre: <span className="fw-lighter">{book.genre.join(", ")}</span>
-      </h3>
-      <div className="details-borrowedBy">
-        <h3 className="fw-light">Borrowed By:</h3>
-        <ul>
-          {book.borrowedBy.map((currMember) =>
-            members.map(
-              (member) =>
-                member.id === currMember && (
-                  <li className="fw-light">
-                    {member.id} - {member.firstName} {member.lastName}
-                  </li>
-                )
-            )
-          )}
-        </ul>
+      <div className="d-flex justify-content-between align-items-center">
+        <h1 className="page-title">{book.title}</h1>
         {book.available ? (
           <>
-            <Button variant="outline-dark" onClick={setIsOpen}>
-              Add New Book
+            <Button variant="outline-dark" onClick={handleOpen}>
+              Borrow
             </Button>
             <AddBorrowerModal
               isOpen={isOpen}
@@ -52,16 +43,50 @@ const BookDetails = () => {
           </>
         ) : (
           <>
-            <Button variant="outline-dark" onClick={setIsOpen}>
+            <Button variant="outline-dark" onClick={handleReturn}>
               Return
             </Button>
-            <AddBorrowerModal
-              isOpen={isOpen}
-              handleClose={handleClose}
-              book={book}
-            />
           </>
         )}
+      </div>
+      <hr />
+      <div className="d-flex align-items-start gap-3">
+        <div className="w-25">
+          <div className="card py-2 px-3 mb-3">
+            <h3 className="fw-normal fs-3">
+              Author: <br />
+              <span className="fw-lighter fs-5 text-capitalize">
+                {book.author}
+              </span>
+            </h3>
+          </div>
+          <div className="card py-2 px-3 mb-3">
+            <h3 className="fw-normal fs-3">
+              Genre: <br />
+              <span className="fw-lighter fs-5 text-capitalize">
+                {book.genre.join(", ")}
+              </span>
+            </h3>
+          </div>
+        </div>
+        <div className="details-borrowedBy w-75 card py-2 px-3 m-0">
+          <h3 className="fw-normal fs-3">Borrowed By:</h3>
+          <ul>
+            {book.borrowedBy.map((currMember) =>
+              members.map(
+                (member) =>
+                  member.id === currMember && (
+                    <li
+                      key={member.id}
+                      className="fw-normal fs-5 py-1 px-2 bg-light mt-1 border rounded"
+                    >
+                      {member.firstName} {member.lastName}
+                    </li>
+                  )
+              )
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );
