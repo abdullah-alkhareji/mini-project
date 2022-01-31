@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import members from "../data/members";
 import bookStore from "../stores/bookStore";
 import { Button } from "react-bootstrap";
 import AddBorrowerModal from "./AddBorrowerModal";
@@ -71,10 +70,10 @@ const BookDetails = () => {
 				</div>
 				<div className='col-lg-8 col-md-12'>
 					<div className='details-borrowedBy card py-2 px-3 m-0'>
-						<h3 className='fw-normal fs-3'>Borrowed By:</h3>
+						<h3 className='fw-normal fs-3'>Borrowing History:</h3>
 						<ul>
 							{book.borrowedBy.map(currMember =>
-								members.map(
+								memberStore.members.map(
 									member =>
 										member.id === currMember && (
 											<li

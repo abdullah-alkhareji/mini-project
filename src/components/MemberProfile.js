@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams, Navigate } from "react-router-dom";
-import books from "../data/books";
 import memberStore from "../stores/memberStore";
 import { FaBookmark } from "react-icons/fa";
+import bookStore from "../stores/bookStore";
 
 const MemberProfile = () => {
 	const { slug } = useParams();
@@ -38,7 +38,7 @@ const MemberProfile = () => {
 						<h3 className='fw-normal fs-3'>Current Borrowed Books:</h3>
 						<ul>
 							{member.currentlyBorrowedBooks.map(currBook =>
-								books.map(
+								bookStore.books.map(
 									book =>
 										book.id === currBook && (
 											<li
