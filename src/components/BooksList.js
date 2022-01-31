@@ -12,15 +12,16 @@ const BooksList = () => {
 	const handleOpen = () => setIsOpen(true);
 
 	const search = e => bookStore.setQuery(e.target.value);
+	const genFilter = ev => bookStore.setFilterQuery(ev.target.value);
 
 	const booksList = bookStore.books
 		.filter(
 			book =>
 				book.title
 					.toLowerCase()
-					.includes(bookStore.query.toLowerCase().trim()) ||
+					.includes(bookStore.query.toLowerCase().trim()) &&
 				book.genre.find(gen =>
-					gen.toLowerCase().includes(bookStore.query.toLowerCase())
+					gen.toLowerCase().includes(bookStore.filterQuery.toLowerCase())
 				)
 		)
 		.map(book => (
@@ -44,6 +45,8 @@ const BooksList = () => {
 				</li>
 			</Link>
 		));
+
+	console.log(bookStore.books);
 	return (
 		<div className='list'>
 			<div className='page-title w-100 d-flex justify-content-between align-items-center mb-3'>
@@ -53,15 +56,27 @@ const BooksList = () => {
 				</Button>
 			</div>
 			<hr />
-			<div className='d-flex gap-3'>
-				<input
-					type='search'
-					className='form-control ms-auto mb-3 rounded'
-					placeholder='Search...'
-					aria-label='Search'
-					aria-describedby='search-addon'
-					onChange={search}
-				/>
+			<div className='row mb-3'>
+				<div className='col-lg-8 col-md-12'>
+					<input
+						type='search'
+						className='form-control rounded'
+						placeholder='Search...'
+						aria-label='Search'
+						aria-describedby='search-addon'
+						onChange={search}
+					/>
+				</div>
+				<div className='col-lg-4 col-md-12'>
+					<select className='form-select rounded' onChange={genFilter}>
+						<option value=''>All Genres</option>
+						{bookStore.gen.map(genre => (
+							<option key={genre} value={genre}>
+								{genre}
+							</option>
+						))}
+					</select>
+				</div>
 			</div>
 			<ul className='row'>{booksList}</ul>
 			<AddBookModal isOpen={isOpen} handleClose={handleClose} />

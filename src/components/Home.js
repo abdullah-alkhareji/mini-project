@@ -6,6 +6,7 @@ import memberStore from "../stores/memberStore";
 import bookStore from "../stores/bookStore";
 
 const Home = () => {
+	console.log(bookStore.gen);
 	return (
 		<>
 			<div className='row'>
@@ -45,19 +46,23 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className='d-flex gap-3 my-auto justify-content-center align-items-center'>
-				<Link
-					to='/members'
-					className='btn btn-outline-secondary p-5 home-card d-flex justify-content-center align-items-center flex-column'>
-					<FiUsers className='m-5' size={150} />
-					<h1 className='text-center'>Members</h1>
-				</Link>
-				<Link
-					to='/books'
-					className='btn btn-outline-secondary p-5 home-card d-flex justify-content-center align-items-center flex-column'>
-					<RiBookMarkLine className='m-5' size={150} />
-					<h1 className='text-center'>Books</h1>
-				</Link>
+			<div className='row my-auto justify-content-center align-items-center'>
+				<div className='col-lg-6 com-md-12 p-2'>
+					<Link
+						to='/members'
+						className='btn btn-outline-secondary p-5 home-card d-flex justify-content-center align-items-center flex-column'>
+						<FiUsers className='m-5' size={150} />
+						<h1 className='text-center'>Members</h1>
+					</Link>
+				</div>
+				<div className='col-lg-6 com-md-12 p-2'>
+					<Link
+						to='/books'
+						className='btn btn-outline-secondary p-5 home-card d-flex justify-content-center align-items-center flex-column'>
+						<RiBookMarkLine className='m-5' size={150} />
+						<h1 className='text-center'>Books</h1>
+					</Link>
+				</div>
 			</div>
 		</>
 	);
